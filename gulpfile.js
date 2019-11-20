@@ -120,7 +120,7 @@ gulp.task("server", function () {
   gulp.watch("source/img/*.jpg", gulp.series("imagemin", "refresh"));
   gulp.watch("source/components/*.html", gulp.series("html", "refresh"));
   gulp.watch("source/*.html", gulp.series("html", "refresh"));
-  gulp.watch("source/js/*.js", gulp.series("copy", "refresh"));
+  gulp.watch("source/js/*.js", gulp.series("minjs", "copy", "refresh"));
 });
 
 gulp.task("refresh", function (done) {
