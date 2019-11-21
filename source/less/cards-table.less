@@ -1,0 +1,62 @@
+.cards-table {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+
+  margin-top: 30px;
+
+  &-inner {
+    display: flex;
+  }
+
+  &_card {
+    display: flex;
+    flex-direction: row;
+
+    width: 140px;
+    height: 200px;
+    margin: 5px;
+
+    border: 1px solid @hover-white;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: @hover-white;
+      transition: @transition;
+    }
+  }
+
+  &_img {
+    width: 80px;
+    margin: auto;
+  }
+
+  &_deck {
+    display: flex;
+  }
+}
+
+.player-one {
+  margin-bottom: 20px;
+}
+
+.player-two {
+  margin-top: 20px;
+}
+
+.card-table--shirt {
+  background: linear-gradient(#e66465, #9198e5);
+
+  &:hover {
+    background: linear-gradient(#9198e5, #e66465);
+    transform: scale(1.1);
+    transition: @transition;
+  }
+
+  &:active {
+    transform: scale(2);
+    opacity: 0;
+    transition: @transition;
+  }
+}

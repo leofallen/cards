@@ -10,7 +10,8 @@
 
   <main class="page-main">
 
-    <section class="menu overlay">
+    <!-- меню -->
+    <section class="menu">
       <ul class="menu_list">
         <li class="menu_list-item menu_list-item--mutiplayer">МУЛЬТИПЛЕЕР</li>
         <li class="menu_list-item menu_list-item--oneplayer">ОДИН ИГРОК</li>
@@ -18,14 +19,39 @@
       </ul>
     </section>
 
+    <!-- игральный стол -->
+    <section class="cards-table visually-hidden">
+
+      <div class="cards-table-inner player-one">
+
+      </div>
+
+      <div class="cards-table_deck">
+        <div class="cards-table_card card-table--shirt">
+        </div>
+        <div class="cards-table_card card-table--shirt">
+        </div>
+        <div class="cards-table_card card-table--shirt">
+        </div>
+        <div class="cards-table_card card-table--shirt">
+        </div>
+      </div>
+
+      <div class="cards-table-inner player-two">
+
+      </div>
+
+    </section>
+
   </main>
 
+  <!-- шаблон карты -->
   <template class="card-template">
-    <div class="card">
-      <img src="img/card-icon-bear.svg" alt="card-icon-bear">
+    <div class="cards-table_card">
+      <img class="cards-table_img" src="img/card-icon-bear.svg" alt="card-icon-bear" width="70">
     </div>
   </template>
 
-  <script src="./js/main-min.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>
