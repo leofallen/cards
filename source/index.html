@@ -27,13 +27,17 @@
       </div>
 
       <div class="cards-table_deck">
-        <div class="cards-table_card card-table--shirt">
+        <div class="cards-table_card card-table--shirt" tabindex="1">
+          <img class="cards-table_img" src="" alt="">
         </div>
-        <div class="cards-table_card card-table--shirt">
+        <div class="cards-table_card card-table--shirt" tabindex="1">
+          <img class="cards-table_img" src="" alt="">
         </div>
-        <div class="cards-table_card card-table--shirt">
+        <div class="cards-table_card card-table--shirt" tabindex="1">
+          <img class="cards-table_img" src="" alt="">
         </div>
-        <div class="cards-table_card card-table--shirt">
+        <div class="cards-table_card card-table--shirt" tabindex="1">
+           <img class="cards-table_img" src="" alt="">
         </div>
       </div>
 
@@ -45,10 +49,29 @@
 
   </main>
 
+
+  <!-- Сообщение о совпадении карт -->
+  <section class="coincidence-popup popup overlay visually-hidden">
+     <div class="coincidence-popup_block popup_block">
+       <h1 class="coincidence-popup_title">Совпадение!</h1>
+       <p class="coincidence-popup_discription">Давай еще</p>
+     </div>
+  </section>
+
+<!-- Сообщение о переходе хода -->
+  <section class="switch-player-popup popup overlay visually-hidden">
+      <div class="switch-player-popup_block popup_block">
+        <h1 class="switch-player-popup_title">Промах</h1>
+        <p class="switch-player-popup_discription"></p>
+      </div>
+  </section>
+
+
   <!-- шаблон карты -->
   <template class="card-template">
     <div class="cards-table_card">
-      <img class="cards-table_img" src="img/card-icon-bear.svg" alt="card-icon-bear" width="70">
+      <span class="cards-table_card-count">0</span>
+      <img class="cards-table_img" src="" alt="" width="70" >
     </div>
   </template>
 
