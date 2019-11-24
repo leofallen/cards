@@ -12,11 +12,12 @@
 
   &_card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     width: 140px;
     height: 200px;
     margin: 5px;
+    padding: 10px;
 
     border: 1px solid @hover-white;
     border-radius: 10px;
@@ -27,9 +28,18 @@
     }
   }
 
+  &_card-count {
+    width: 40px;
+
+    color: @white;
+    font-size: 30px;
+  }
+
   &_img {
     width: 80px;
-    margin: auto;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &_deck {
@@ -48,10 +58,12 @@
 .card-table--shirt {
   background: linear-gradient(#e66465, #9198e5);
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: linear-gradient(#9198e5, #e66465);
     transform: scale(1.1);
     transition: @transition;
+    outline: none;
   }
 
   &:active {
