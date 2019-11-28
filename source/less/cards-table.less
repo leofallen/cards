@@ -1,4 +1,6 @@
 .cards-table {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -8,6 +10,17 @@
 
   &-inner {
     display: flex;
+  }
+
+  &_pointer {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+
+    width: 100%;
+    height: 210px;
+
+    background-color: @pointer-green;
   }
 
   &_card {
@@ -21,6 +34,7 @@
 
     border: 1px solid @hover-white;
     border-radius: 10px;
+    background-color: @body-gray;
 
     &:hover {
       background-color: @hover-white;

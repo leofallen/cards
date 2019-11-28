@@ -20,12 +20,39 @@ let playerOneCards = gameTable.querySelector('.player-one').children;
 let playerTwoCards = gameTable.querySelector('.player-two').children;
 
 
-function getRandom(min, max) {
+const getRandom =(min, max) => {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
 
 const cards = [
+  'bear',
+  'chick',
+  'coala',
+  'fox',
+  'frog',
+  'monkey',
+  'panda',
+  'pig',
+  'tiger',
+  'bear',
+  'chick',
+  'coala',
+  'fox',
+  'frog',
+  'monkey',
+  'panda',
+  'pig',
+  'tiger',
+  'bear',
+  'chick',
+  'coala',
+  'fox',
+  'frog',
+  'monkey',
+  'panda',
+  'pig',
+  'tiger',
   'bear',
   'chick',
   'coala',
@@ -83,7 +110,7 @@ const shuffle = function (arr) {
 }
 
 // раздает по четыре случайные, неповторяющиеся карты игрокам
-function getStartGame() {
+const getStartGame = () => {
   gameCards = cards.slice();
   gameCards.splice(0, CARDS_DIVERSITY).forEach(function(it){
     gameDeck.push(it);
@@ -105,7 +132,7 @@ function getStartGame() {
 }
 
 // навешивает события по клику на пункты меню
-menuItemList.forEach(function(it) {
+menuItemList.forEach((it) => {
   it.addEventListener('click', function() {
     if (it.className === multuplayer) {
       getStartGame();
@@ -118,7 +145,7 @@ menuItemList.forEach(function(it) {
 });
 
 // создает случайную карту
-const getCard = function(icon) {
+const getCard = (icon) => {
   const fragment = document.createDocumentFragment();
   const element = cardTemplate.cloneNode(true);
   element.querySelector('.cards-table_img').src = 'img/card-icon-' + icon + '.svg';
@@ -139,7 +166,7 @@ const hiddenCard = document.querySelector('.cards-table_card');
 const switchPlayerText = switchPopup.querySelector('.switch-player-popup_discription');
 
 // закрытие оверлеев по клику на пустой области
-overlay.forEach(function (it) {
+overlay.forEach((it) => {
   it.addEventListener('click', function (evt) {
     if (evt.target === it) {
       it.classList.add('visually-hidden');
@@ -151,19 +178,19 @@ overlay.forEach(function (it) {
   });
 });
 
-function closePopup() {
+const closePopup = () => {
   coincidencePopup.classList.add('visually-hidden');
   hiddenCards.forEach(function (it) {
     it.classList.add('card-table--shirt');
   });
 };
 
-function showPopup(popup) {
+const showPopup = (popup) => {
   popup.classList.remove('visually-hidden');
 }
 
 // меняет значение счетчика на картах
-function countCard(arr, element) {
+const countCard = (arr, element) => {
   for (let i = 0; i < arr.length; i++) {
     alt = arr[i].querySelector('.cards-table_img').alt;
     count = arr[i].querySelector('.cards-table_card-count');
@@ -175,20 +202,21 @@ function countCard(arr, element) {
 };
 
 // проверяет есть ли сопадения карт
-function cardsCoincidence(card, arr, element) {
+const cardsCoincidence = (card, arr, element) => {
   if (arr.includes(card)) {
     showPopup(coincidencePopup);
     arr.push(element);
     countCard(playersCards.active, card);
   } else {
     switchPlayer();
+    movePointer('+');
     switchPlayerText.textContent = switchDescription.one;
     showPopup(switchPopup);
   }
 };
 
 // возвращает случайный элемент массива с картами
-function ramdomElement() {
+const ramdomElement = () => {
   number = getRandom(0, gameCards.length -1);
   let element = gameCards[number];
   gameCards.splice(number, 1);
@@ -210,21 +238,22 @@ let playersCards = {
 };
 
 let switchDescription = {
-  one: 'ход переходит к игроку номер 2',
-  two: 'ход переходит к игроку номер 1'
+  one: 'ход переходит к игроку номер 1',
+  two: 'ход переходит к игроку номер 2'
 }
 
-function switchPlayer() {
+const switchPlayer = () => {
   let {active: one, disactive: two} = players;
   players = {active: two, disactive: one};
   let {active: first, disactive: second} = playersCards;
   playersCards = {active: second, disactive: first};
   let {one: frst, two: scnd} = switchDescription;
   switchDescription = {one: scnd, two: frst};
-
+  let {one: down, two: up} = pointerCoordsToggle;
+  pointerCoordsToggle = {one: up, two: down};
 };
 
-function onCardClick(evt) {
+const onCardClick = (evt) => {
   let element = evt.target;
   let icon = ramdomElement(); // этот элемент надо добавить в масив игрока если есть совпадение иначе выкинуть
   element.querySelector('.cards-table_img').src = 'img/card-icon-'+ icon +'.svg';
@@ -232,7 +261,43 @@ function onCardClick(evt) {
   cardsCoincidence(icon, players.active, icon);
 };
 
-hiddenCards.forEach(function (it) {
+hiddenCards.forEach((it) => {
   it.addEventListener('click', onCardClick);
 });
 
+// управление полосой выделения активного игрока
+
+let pointerCoords = 0;
+const pointer = gameTable.querySelector('.cards-table_pointer');
+let pointerCoordsToggle = {
+  one: false,
+  two: true
+};
+
+const movePointerDown = () => {
+  if (pointerCoords > 455) {
+    return true;
+  }
+  pointerCoords += 5;
+  pointer.style.top = pointerCoords + 'px';
+  setTimeout(movePointerDown, 6);
+};
+
+const movePointerUp = () => {
+  if (pointerCoords < 5) {
+    return true;
+  }
+  pointerCoords -=5;
+  pointer.style.top = pointerCoords + 'px';
+  setTimeout(movePointerUp, 6);
+}
+
+const movePointer = () => {
+
+  if (pointerCoordsToggle.one) {
+    movePointerDown();
+  } else if (!pointerCoordsToggle.one)
+    movePointerUp();
+};
+
+console.log(pointerCoordsToggle.one);
