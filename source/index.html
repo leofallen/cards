@@ -30,16 +30,16 @@
 
       <div class="cards-table_deck">
         <div class="cards-table_card card-table--shirt" tabindex="1">
-          <img class="cards-table_img" src="" alt="">
+          <img class="cards-table_img cards-table_img--align" src="" alt="">
         </div>
         <div class="cards-table_card card-table--shirt" tabindex="1">
-          <img class="cards-table_img" src="" alt="">
+          <img class="cards-table_img cards-table_img--align" src="" alt="">
         </div>
         <div class="cards-table_card card-table--shirt" tabindex="1">
-          <img class="cards-table_img" src="" alt="">
+          <img class="cards-table_img cards-table_img--align" src="" alt="">
         </div>
         <div class="cards-table_card card-table--shirt" tabindex="1">
-           <img class="cards-table_img" src="" alt="">
+           <img class="cards-table_img cards-table_img--align" src="" alt="">
         </div>
       </div>
 
@@ -53,7 +53,7 @@
 
 
   <!-- Сообщение о совпадении карт -->
-  <section class="coincidence-popup popup overlay visually-hidden">
+  <section class="coincidence-popup popup overlay visually-hidden" onmousedown="return false" onselectstart="return false">
      <div class="coincidence-popup_block popup_block">
        <h1 class="coincidence-popup_title">Совпадение!</h1>
        <p class="coincidence-popup_discription">Давай еще</p>
@@ -61,7 +61,7 @@
   </section>
 
 <!-- Сообщение о переходе хода -->
-  <section class="switch-player-popup popup overlay visually-hidden">
+  <section class="switch-player-popup popup overlay visually-hidden" onmousedown="return false" onselectstart="return false">
       <div class="switch-player-popup_block popup_block">
         <h1 class="switch-player-popup_title">Промах</h1>
         <p class="switch-player-popup_discription"></p>
@@ -77,6 +77,11 @@
     </div>
   </template>
 
-  <script src="./js/main.js"></script>
+  <script type="module" src="./js/index.js"></script>
+
+  <!-- <script type="module" src="./js/util.js"></script>
+  <script type="module" src="./js/start-game.js"></script>
+  <script type="module" src="./js/hidden-cards.js"></script>
+  <script type="module" src="./js/pointer.js"></script> -->
 </body>
 </html>

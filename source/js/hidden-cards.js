@@ -1,180 +1,7 @@
-'use strict';
+import {gameTable, gameCards, playerOneBank, playerTwoBank} from './start-game.js';
+import {getRandom} from './util.js';
+import {movePointer} from './pointer.js';
 
-const CARDS_DIVERSITY = 9;
-
-const getRandom =(min, max) => {
-  let rand = min - 0.5 + Math.random() * (max - min + 1);
-  return Math.round(rand);
-};
-
-const shuffle = function (arr) {
-  let j = '';
-  let temp = '';
-  for (let i = arr.length - 1; i > 0; i--) {
-    j = Math.floor(Math.random() * (i + 1));
-    temp = arr[j];
-    arr[j] = arr[i];
-    arr[i] = temp;
-  }
-  return arr;
-};
-
-const menuList = document.querySelector('.menu');
-const multuplayer = 'menu_list-item menu_list-item--mutiplayer';
-const onePlayer = 'menu_list-item menu_list-item--oneplayer';
-const rules = 'menu_list-item menu_list-item--rules';
-const menuItemList = menuList.querySelectorAll('.menu_list-item');
-const cardTemplate = document.querySelector('.card-template')
-.content.querySelector('.cards-table_card');
-const gameTable = document.querySelector('.cards-table');
-const playerOne = gameTable.querySelector('.player-one');
-const playerTwo = gameTable.querySelector('.player-two');
-
-const cards = [
-  'bear',
-  'chick',
-  'coala',
-  'fox',
-  'frog',
-  'monkey',
-  'panda',
-  'pig',
-  'tiger',
-  'bear',
-  'chick',
-  'coala',
-  'fox',
-  'frog',
-  'monkey',
-  'panda',
-  'pig',
-  'tiger',
-  'bear',
-  'chick',
-  'coala',
-  'fox',
-  'frog',
-  'monkey',
-  'panda',
-  'pig',
-  'tiger',
-  'bear',
-  'chick',
-  'coala',
-  'fox',
-  'frog',
-  'monkey',
-  'panda',
-  'pig',
-  'tiger',
-  'bear',
-  'chick',
-  'coala',
-  'fox',
-  'frog',
-  'monkey',
-  'panda',
-  'pig',
-  'tiger',
-  'bear',
-  'chick',
-  'coala',
-  'fox',
-  'frog',
-  'monkey',
-  'panda',
-  'pig',
-  'tiger',
-  'bear',
-  'chick',
-  'coala',
-  'fox',
-  'frog',
-  'monkey',
-  'panda',
-  'pig',
-  'tiger'
-]; // изначальный массив карт
-
-let gameCards = []; // масиив в который копируется изначальный масив карт
-const gameDeck = []; // временный массив для операций с картами
-const playerOneBank = [];
-const playerTwoBank = [];
-
-// раздает по четыре случайные, неповторяющиеся карты игрокам
-const getStartGame = () => {
-  gameCards = cards.slice();
-  gameCards.splice(0, CARDS_DIVERSITY).forEach(function(it){
-    gameDeck.push(it);
-  });
-
-  shuffle(gameDeck);
-  menuList.classList.add('visually-hidden');
-
-  for(let i = 0; i < 4; i++) {
-    playerOne.appendChild(getCard(gameDeck[i]));
-    playerOneBank.push(gameDeck[i]);
-    playerTwo.appendChild(getCard(gameDeck[i + 4]));
-    playerTwoBank.push(gameDeck[i +4]);
-  }
-
-  gameCards.push(gameDeck.pop());
-  gameDeck.splice(0, gameDeck.length);
-  gameTable.classList.remove('visually-hidden');
-};
-
-// навешивает события по клику на пункты меню
-menuItemList.forEach((it) => {
-  it.addEventListener('click', function() {
-    if (it.className === multuplayer) {
-      getStartGame();
-    } else if (it.clasName = onePlayer) {
-      console.log(it.className);
-    } else if (it.className === rules) {
-      console.log(it.className);
-    }
-  });
-});
-
-// создает случайную карту
-const getCard = (icon) => {
-  const fragment = document.createDocumentFragment();
-  const element = cardTemplate.cloneNode(true);
-  element.querySelector('.cards-table_img').src = 'img/card-icon-' + icon + '.svg';
-  element.querySelector('.cards-table_img').alt = icon;
-  element.classList.add('cards-table_card--' + icon);
-  fragment.appendChild(element);
-  return fragment;
-};
-
-let pointerCoords = 0;
-const pointer = gameTable.querySelector('.cards-table_pointer');
-
-const movePointerDown = () => {
-  if (pointerCoords > 455) {
-    return true;
-  }
-  pointerCoords += 5;
-  pointer.style.top = pointerCoords + 'px';
-  setTimeout(movePointerDown, 6);
-};
-
- const movePointerUp = () => {
-  if (pointerCoords < 5) {
-    return true;
-  }
-  pointerCoords -=5;
-  pointer.style.top = pointerCoords + 'px';
-  setTimeout(movePointerUp, 6);
-};
-
-const movePointer = () => {
-
-  if (pointerCoordsToggle.one) {
-    movePointerDown();
-  } else if (!pointerCoordsToggle.one)
-    movePointerUp();
-};
 
 const coincidencePopup = document.querySelector('.coincidence-popup');
 const switchPopup = document.querySelector('.switch-player-popup');
@@ -216,7 +43,7 @@ const showPopup = (popup) => {
       it.querySelector('img').src = '';
     });
   }
-  setTimeout(popapRemove, 1000);
+  setTimeout(popapRemove, 1000)
 };
 
 // меняет значение счетчика на картах
@@ -225,7 +52,7 @@ const countCard = (arr, element) => {
     let alt = arr[i].querySelector('.cards-table_img').alt;
     let count = arr[i].querySelector('.cards-table_card-count');
     if (alt === element) {
-      let num = Number(count.textContent);
+      let num = Number(count.textContent)
       count.textContent = num += 1;
     }
   }
@@ -273,7 +100,7 @@ let switchDescription = {
   two: 'ход переходит к игроку номер 2'
 };
 
-let pointerCoordsToggle = {
+export let pointerCoordsToggle = {
   one: false,
   two: true
 };
@@ -314,9 +141,10 @@ const cardAnimation = (icon, element) => {
   imgHidenCard.classList.add('img-animation-mixin');
   cardCount.classList.add('img-animation-mixin');
   function removeAnimation() {
-    imgPlayerCard.classList.remove('img-animation-mixin');
-    imgHidenCard.classList.remove('img-animation-mixin');
-    cardCount.classList.remove('img-animation-mixin');
+    imgPlayerCard.classList.remove('img-animation-mixin')
+    imgHidenCard.classList.remove('img-animation-mixin')
+    cardCount.classList.remove('img-animation-mixin')
   }
   setTimeout(removeAnimation, 1000);
-};
+}
+
