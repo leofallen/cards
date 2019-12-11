@@ -50,7 +50,7 @@ gulp.task("css", function () {
 });
 
 gulp.task("minjs", function () {
-  return gulp.src(["source/js/*.js"])
+  return gulp.src(["source/js/**/*.js"])
   .pipe(minify())
   .pipe(gulp.dest("build/js"))
   .pipe(server.stream())
